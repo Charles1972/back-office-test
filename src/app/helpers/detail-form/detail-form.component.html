@@ -1,0 +1,123 @@
+<div *ngIf="title != ''" class="font-semi-bold md:text-xl mb-3" [ngClass]="{'font-bold text-sm md:text-base mb-0': small}">
+  <span>{{title | translate}}</span>
+</div>
+
+<ng-content select="[pre-body]"></ng-content>
+
+<div *ngIf="configurations.length > 0">
+  <form [formGroup]="detailForm" (ngSubmit)="onSubmit()">
+    <div class="grid grid-cols-3 sm:grid-cols-6 gap-x-4 gap-y-2" [ngClass]="{'gap-x-3 gap-y-1': small}">
+      <div *ngFor="let conf of (removeHiddenControls ? configurationsFiltered : configurations) ; let i = index" class="col-span-3"
+           [ngClass]="{'sm:col-span-6': conf.fullRow, 'flex items-end mt-1': conf.type == eFormType.checkbox,
+                       'lg:col-span-1': conf.colLength == 1, 'lg:col-span-2': conf.colLength == 2,
+                       'lg:col-span-3': conf.colLength == 3, 'lg:col-span-4': conf.colLength == 4,
+                       'lg:col-span-5': conf.colLength == 5}">
+        <div *ngIf="!conf.hidden" [ngSwitch]="conf.type">
+          <div *ngSwitchCase="eFormType.input"
+               [ngClass]="{'show-always-up-down-button': showUpDownNumberAlways && !hideUpDownNumberAlways,
+                           'custom-input-no-spin': hideUpDownNumberAlways && !showUpDownNumberAlways}">
+            <label [ngClass]="{'small': small}">{{conf.label | translate}} <span *ngIf="conf.validationRequired">*</span></label>
+            <input [type]="getInputType(conf)" [formControlName]="conf.key" class="custom-input {{getTextAlign(conf.textAlign, conf.inputType)}} custom-input-no-spin"
+                   autofocus="" placeholder="" autocomplete="{{getInputAutocomplete(conf)}}"
+                   [min]="conf.number?.min" [max]="conf.number?.max" [step]="conf.number?.step"
+                   [minlength]="conf.stringLength?.min" [maxlength]="conf.stringLength?.max"
+                   [ngClass]="{'error': (submitted || (detailForm.get(conf.key).touched && markOnTouched)) && detailForm.get(conf.key).invalid, 'small': small}"
+                   [email]="conf.inputType == eInputType.email" (ngModelChange)="onInputChange(conf.key, $event)">
+            <div *ngIf="conf.inputType == eInputType.password" >
+              <img *ngIf="!(submitted && detailForm.get(conf.key).invalid)" role="button" class="img-password" alt=""
+                   [src]="showPassword ? passwordImg : noPasswordImg" (click)="showPassword = !showPassword">
+            </div>
+            <div *ngIf="(submitted || (detailForm.get(conf.key).touched && markOnTouched))">
+              <p *ngIf="detailForm.get(conf.key).invalid"
+                 class="error-text">{{'The field' | translate}} {{conf.label | translate}} {{'is mandatory' | translate}}</p>
+              <p *ngIf="detailForm.get(conf.key).hasError('email')"
+                 class="error-text">{{'The value entered does not meet the criteria for the Email type' | translate}}</p>
+              <p *ngIf="detailForm.get(conf.key).hasError('minlength')"
+                 class="error-text">{{'The entered value must have a minimum length of' | translate}} {{conf.stringLength?.min}}</p>
+              <p *ngIf="detailForm.get(conf.key).hasError('maxlength')"
+                 class="error-text">{{'The entered value must have a maximum length of' | translate}}  {{conf.stringLength?.max}}</p>
+              <p *ngIf="detailForm.get(conf.key).hasError('min')"
+                 class="error-text">{{'The entered value must have a minimum value of' | translate}} {{conf.number?.min}}</p>
+              <p *ngIf="detailForm.get(conf.key).hasError('max')"
+                 class="error-text">{{'The entered value must have a maximum value of' | translate}}  {{conf.number?.max}}</p>
+              <p *ngIf="detailForm.get(conf.key).hasError('notSame')"
+                 class="error-text">{{'Passwords entered do not match' | translate}}</p>
+              <p *ngIf="detailForm.get(conf.key).hasError('pattern')"
+                 class="error-text">{{'Password do not match minimum criteria' | translate}}</p>
+            </div>
+           </div>
+          <div *ngSwitchCase="eFormType.select">
+            <label [ngClass]="{'small': small}">{{conf.label | translate}} <span *ngIf="conf.validationRequired">*</span></label>
+            <div *ngIf="conf.multiSelect">
+              <ng-multiselect-dropdown class="custom-multi-select" [formControlName]="conf.key" [placeholder]="conf.selectItems.placeholder"
+                 [settings]="{singleSelection: false, idField: conf.selectItems.bindId, textField: conf.selectItems.bindValue,
+                 selectAllText: ('Select All' | translate), unSelectAllText: ('Unselect All' | translate)}" [data]="selectsLists[conf.key]"
+                 [disabled]="conf.disabled || conf.alwaysDisabled">
+              </ng-multiselect-dropdown>
+            </div>
+            <div *ngIf="!conf.multiSelect">
+              <select [formControlName]="conf.key" class="custom-input" (ngModelChange)="onSelectChange(conf.key, $event)"
+                      [ngClass]="{'error': (submitted || (detailForm.get(conf.key).touched && markOnTouched)) && detailForm.get(conf.key).invalid, 'small': small}">
+                <option *ngIf="conf.selectItems.placeholder" disabled selected [ngValue]="">{{conf.selectItems.placeholder | translate}}</option>
+                <option *ngFor="let item of selectsLists[conf.key]; let i = index" [ngValue]="item[conf.selectItems.bindId]">{{item[conf.selectItems.bindValue] | translate}}</option>
+              </select>
+            </div>
+            <p *ngIf="(submitted || (detailForm.get(conf.key).touched && markOnTouched)) && detailForm.get(conf.key).invalid"
+               class="error-text">{{'The field' | translate}} {{conf.label | translate}} {{'is mandatory' | translate}}</p>
+          </div>
+          <div *ngSwitchCase="eFormType.checkbox" [ngClass]="{'-mb-1': small}">
+            <label class="inline-flex items-center">
+              <input id="detail-form-chk-{{conf.key}}'" type="checkbox" class="custom-checkbox"
+                     [ngClass]="{'disabled': conf.disabled || conf.alwaysDisabled, 'mt-3': small}"
+                     [formControlName]="conf.key">
+              <span class="ml-1"
+                    [ngClass]="{'text-[14px]': conf.checkBoxTextSize == null, 'text-[10px]': conf.checkBoxTextSize == 1,
+                    'text-[12px]': conf.checkBoxTextSize == 2, 'ml-0 text-[12px] mt-3': small}">
+                {{conf.label | translate}}</span>
+            </label>
+            <p *ngIf="(submitted || (detailForm.get(conf.key).touched && markOnTouched)) && detailForm.get(conf.key).invalid"
+               class="error-text">{{'This field is mandatory and needs to be accepted' | translate}}</p>
+          </div>
+          <div *ngSwitchCase="eFormType.radio" [ngClass]="{'-mb-1': small}">
+            <label [ngClass]="{'small': small}">{{conf.label | translate}} <span *ngIf="conf.validationRequired">*</span></label>
+            <div class="flex justify-start mt-1">
+              <div *ngFor="let radioItem of conf.radioItems; let i = index" [ngClass]="{'ml-3': i > 0}">
+                <label class="inline-flex items-center">
+                  <input type="radio" class="custom-radio"
+                         [ngClass]="{'disabled': conf.disabled || conf.alwaysDisabled, 'mt-3': small}"
+                         [formControlName]="conf.key" [value]="radioItem.value">
+                  <span class="ml-1 text-[14px]"
+                        [ngClass]="{'text-[14px]': conf.checkBoxTextSize == null, 'text-[10px]': conf.checkBoxTextSize == 1,
+                        'text-[12px]': conf.checkBoxTextSize == 2, 'ml-0 text-[12px] mt-3': small}">
+                    {{radioItem.label}}</span>
+                </label>
+              </div>
+            </div>
+            <p *ngIf="(submitted || (detailForm.get(conf.key).touched && markOnTouched)) && detailForm.get(conf.key).invalid"
+              class="error-text">{{'The field' | translate}} {{conf.label | translate}} {{'is mandatory' | translate}}</p>
+          </div>
+          <div *ngSwitchCase="eFormType.textArea">
+            <label [ngClass]="{'small': small}">{{conf.label | translate}} <span *ngIf="conf.validationRequired">*</span></label>
+            <textarea [formControlName]="conf.key" class="custom-input"
+                      [maxlength]="conf.stringLength?.max" [rows]="conf.textAreaRows ? conf.textAreaRows : 4"
+                      [ngClass]="{'error': (submitted || (detailForm.get(conf.key).touched && markOnTouched)) && detailForm.get(conf.key).invalid, 'small': small}"></textarea>
+            <p *ngIf="(submitted || (detailForm.get(conf.key).touched && markOnTouched)) && detailForm.get(conf.key).invalid"
+              class="error-text">{{'The field' | translate}} {{conf.label | translate}} {{'is mandatory' | translate}}</p>
+            <p *ngIf="detailForm.get(conf.key).hasError('maxlength')"
+               class="error-text">{{'The entered value must have a maximum length of' | translate}}  {{conf.stringLength?.max}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div #ref><ng-content select="[footer]"></ng-content></div>
+    <ng-container *ngIf="!ref.hasChildNodes() && !isReadOnly">
+      <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 mt-6">
+        <div class="sm:col-start-2 sm:col-span-2">
+          <custom-button cssType="btn-primary" [isSubmit]="true" [width]="eCustomButtonWidth.full"
+                         [text]="'Salva'"></custom-button>
+        </div>
+      </div>
+    </ng-container>
+  </form>
+</div>

@@ -1,0 +1,152 @@
+{
+	"info": {
+		"_postman_id": "66187dd2-e416-44c6-8dee-e2caa77630d4",
+		"name": "Euris FE Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "406626"
+	},
+	"item": [
+		{
+			"name": "Stores",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{endpoint}}/stores",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"stores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Store",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{endpoint}}/stores/{{store_id}}",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"stores",
+						"{{store_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{endpoint}}/stores/{{store_id}}/products",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"stores",
+						"{{store_id}}",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Product",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{endpoint}}/stores/{{store_id}}/products/{{product_id}}",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"stores",
+						"{{store_id}}",
+						"products",
+						"{{product_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Product",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"title\": \"string\",\n  \"category\": \"string\",\n  \"price\": 0,\n  \"employee\": \"string\",\n  \"description\": \"string\",\n  \"reviews\": [\n    \"string\"\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{endpoint}}/stores/{{store_id}}/products",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"stores",
+						"{{store_id}}",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Product",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{endpoint}}/stores/{{store_id}}/products/{{product_id}}",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"stores",
+						"{{store_id}}",
+						"products",
+						"{{product_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Stats",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{endpoint}}/stores/{{store_id}}/stats/categories",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"stores",
+						"{{store_id}}",
+						"stats",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
