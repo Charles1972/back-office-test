@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
-import { getStoreResolver } from './resolvers/data.resolver';
+import { getProductsResolver, getStoreResolver } from './resolvers/data.resolver';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -16,7 +16,7 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-    resolve: {storeData: getStoreResolver}
+    resolve: {storeData: getStoreResolver, productsData: getProductsResolver}
   },
 ];
 

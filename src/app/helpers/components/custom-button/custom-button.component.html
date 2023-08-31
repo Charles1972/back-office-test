@@ -1,0 +1,2 @@
+<button *ngIf="!disabled" [type]="getType()" class="{{ 'btn ' + getSize() + getWidth() + (cssType ? ' ' + cssType : '') + (css ? ' ' + css : '') }}" (click)="btnClick()">{{text | translate}}</button>
+<button *ngIf="disabled" [type]="getType()" class="{{ 'btn btn-disabled ' + getSize() + getWidth() + (css ? ' ' + css : '') }}" disabled>{{text | translate}}</button>

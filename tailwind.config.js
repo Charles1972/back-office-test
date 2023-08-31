@@ -6,7 +6,9 @@ module.exports = {
   ],
   darkMode: 'media', // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      display: ["group-hover"],
+    },
     container: {
       padding: {
         DEFAULT: '1rem',

@@ -16,10 +16,18 @@
   }
 }
 
-.products-container {
-  @apply mt-3 sm:mt-5 mx-5 px-3;
+.page-container {
+  @apply container mx-auto mt-5 sm:mt-8;
+}
 
-  .title {
-    @apply font-bold text-xs sm:text-sm;
+.products-container {
+  .header {
+    @apply flex justify-between items-center pb-2;
+
+    .title {
+      @apply font-bold text-sm sm:text-base;
+    }
   }
+
+
 }

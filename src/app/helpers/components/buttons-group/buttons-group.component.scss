@@ -1,0 +1,13 @@
+.btn-group {
+  @apply isolate inline-flex rounded-md shadow-sm;
+
+  button {
+    @apply relative inline-flex items-center;
+    @apply ring-1 ring-inset focus:z-10;
+    @apply bg-white px-2 py-2 text-gray-700 ring-gray-700 hover:bg-gray-200;
+
+    &.selected {
+      @apply bg-gray-700 px-2 py-2 text-white cursor-default;
+    }
+  }
+}

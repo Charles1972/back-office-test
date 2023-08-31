@@ -5,6 +5,11 @@ export interface IStore {
 }
 
 export interface IProduct {
+  id: string;
+  data: IDataProduct;
+}
+
+export interface IDataProduct {
   title: string;
   category: string;
   price: number;
@@ -12,7 +17,6 @@ export interface IProduct {
   description?: string;
   reviews?: string[];
 }
-
 export interface IStatsCategories {
   numberOfProducts: number;
   category: string;

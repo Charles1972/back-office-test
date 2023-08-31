@@ -8,9 +8,25 @@
   </div>
 </div>
 
-<div class="products-container">
-  <span class="title">Gestione Prodotti</span>
-  <div class="rounded border"></div>
+<div class="page-container">
+  <div class="products-container">
+
+    <div class="header">
+      <span class="title">Gestione Prodotti</span>
+      <buttons-group [panelLayoutActive]="panelLayoutActive"
+                     (onPanelLayoutActiveChange)="panelLayoutActive = $event" >
+      </buttons-group>
+    </div>
+    <hr>
+
+    <div *ngIf="products.length > 0">
+      <panel-grid [products]="products" [panelLayoutActive]="panelLayoutActive"></panel-grid>
+    </div>
+
+    <div *ngIf="products.length == 0" class="text-center w-full mt-10">
+      <span class="text-3xl text-orange-500 font-bold">Nessun prodotto configurato!</span>
+    </div>
+  </div>
 </div>
 
 

@@ -1,0 +1,75 @@
+.panel-container {
+  ul {
+    @apply divide-y divide-gray-200;
+
+    li {
+      @apply p-4 flex justify-between bg-gray-50 hover:bg-yellow-100;
+
+      .title {
+        @apply text-base font-semibold leading-6 text-blue-500;
+        @apply truncate hover:whitespace-normal;
+      }
+
+      .description {
+        @apply mt-1 truncate text-sm leading-5 text-gray-800;
+        @apply truncate hover:whitespace-normal;
+      }
+
+      .employee-and-reviews {
+        @apply font-light text-xs leading-5 text-gray-500;
+        @apply whitespace-normal;
+      }
+
+     .category {
+        @apply ml-3 text-sm leading-6 text-gray-500 font-bold max-w-[10rem] sm:max-w-xs lg:max-w-sm;
+        @apply truncate hover:whitespace-normal;
+      }
+
+      .price {
+        @apply mt-1 text-sm font-bold leading-5 text-gray-900;
+      }
+
+      .delete {
+        @apply justify-center items-center;
+
+        .btn {
+          @apply rounded-md;
+          @apply bg-red-500 text-white cursor-pointer;
+          @apply ml-8 p-2.5 w-11 h-11;
+        }
+      }
+    }
+  }
+}
+
+.grid-container {
+  @apply mt-5;
+
+  ul {
+    @apply grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3;
+
+    li {
+      @apply col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow;
+
+      .title {
+        @apply text-center text-base font-semibold leading-6 text-blue-500;
+      }
+
+      .description {
+        @apply mt-1 truncate text-sm leading-5 text-gray-800;
+      }
+    }
+  }
+}
+
+.custom-pagination ::ng-deep .ngx-pagination li{
+  @apply rounded border-0;
+}
+
+.custom-pagination ::ng-deep .ngx-pagination a{
+  @apply rounded border-0 hover:bg-blue-200 text-sm;
+}
+
+.custom-pagination ::ng-deep .ngx-pagination span{
+  @apply text-sm;
+}

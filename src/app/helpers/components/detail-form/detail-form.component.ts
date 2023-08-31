@@ -8,13 +8,13 @@ import {
   ValidatorFn,
   Validators
 } from '@angular/forms';
-import {eCustomButtonWidth, eDetailFormInputType, eDetailFormType, eTextAlign} from "../classes/enums";
+import {eCustomButtonWidth, eDetailFormInputType, eDetailFormType, eTextAlign} from "../../classes/enums";
 import {
   IDetailFormConfiguration,
   IDetailsFormDataUpdate,
   IDetailsFormInputChange,
   IDetailsFormSelectChange
-} from '../classes/interfaces';
+} from '../../classes/interfaces';
 import {DomSanitizer} from "@angular/platform-browser";
 import {DecimalPipe} from '@angular/common';
 
@@ -366,21 +366,6 @@ export class DetailFormComponent implements OnInit, OnChanges {
         }
         else if (conf.type == eDetailFormType.checkbox) {
           itemsOut[objKey] = Boolean(item.value);
-        }
-        else if (conf.type == eDetailFormType.date && item.value != null) {
-          let model: IMyDateModel = item.value;
-          if (conf.dateOptions.dateRange) {
-            // let d1 = model.dateRange.beginJsDate;
-            // d1.setHours(0,0,0, 0);
-            // let d2 = model.dateRange.endJsDate;
-            // d2.setHours(0,0,0, 0);
-            itemsOut[objKey] = model.dateRange.formatted; //d1.toISOString() + ' - ' + d2.toISOString();
-          }
-          else {
-            // let d = model.singleDate.jsDate;
-            // d.setHours(0,0,0, 0);
-            itemsOut[objKey] = model.singleDate.formatted; // d.toISOString();
-          }
         }
         else {
           itemsOut[objKey] = item.value
