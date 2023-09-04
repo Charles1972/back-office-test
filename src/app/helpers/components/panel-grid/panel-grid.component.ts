@@ -13,6 +13,7 @@ export class PanelGridComponent implements OnInit {
   @Input() panelLayoutActive: boolean = true;
 
   @Output() onPageChange = new EventEmitter<number>();
+  @Output() onProductDelete = new EventEmitter<IProduct>();
 
   constructor() { }
 

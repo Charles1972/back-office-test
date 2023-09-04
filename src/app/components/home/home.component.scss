@@ -28,6 +28,8 @@
       @apply font-bold text-sm sm:text-base;
     }
   }
+}
 
-
+.popup-generic-error {
+  @apply mb-7 text-xs break-words;
 }

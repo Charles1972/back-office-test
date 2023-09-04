@@ -13,6 +13,8 @@ import { DetailFormComponent } from './helpers/components/detail-form/detail-for
 import { CustomButtonComponent } from './helpers/components/custom-button/custom-button.component';
 import { ButtonsGroupComponent } from './helpers/components/buttons-group/buttons-group.component';
 import { PanelGridComponent } from './helpers/components/panel-grid/panel-grid.component';
+import { DecimalPipe } from '@angular/common';
+import { ModalComponent } from './helpers/components/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,7 @@ import { PanelGridComponent } from './helpers/components/panel-grid/panel-grid.c
     HomeComponent,
 
     DetailFormComponent,
+    ModalComponent,
     CustomButtonComponent,
     ButtonsGroupComponent,
     PanelGridComponent,
@@ -34,6 +37,7 @@ import { PanelGridComponent } from './helpers/components/panel-grid/panel-grid.c
     NgxPaginationModule
   ],
   providers: [
+    DecimalPipe,
     {provide: HTTP_INTERCEPTORS, useClass: NGXLoaderInterceptorService, multi: true}
   ],
   bootstrap: [AppComponent]

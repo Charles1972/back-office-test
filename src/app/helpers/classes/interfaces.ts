@@ -1,9 +1,6 @@
 import {
   eDetailFormInputType,
   eDetailFormType,
-  eDetailType, eIcon,
-  eTableItemType,
-  eTableSortStatus,
   eTextAlign
 } from "./enums";
 
@@ -35,7 +32,6 @@ export interface IDetailFormConfiguration {
   disabled?: boolean;
   hidden?: boolean;
   alwaysDisabled?: boolean;
-  multiSelect?: boolean;
   textAlign?: eTextAlign;
   defaultValue?: any;
   stringLength?: {
@@ -60,16 +56,5 @@ export interface IDetailFormConfiguration {
   checkBoxTextSize?: number;
 }
 
-export interface IDetailConfiguration {
-  key: string;
-  label: string;
-  type: eDetailType;
-  fullRow?: boolean;
-  colLength?: number;
-  applyValueAsHTML?: boolean;
-  class?: string;
-  numberNotFormatted?: boolean;
-  value?: any;
-}
 
 

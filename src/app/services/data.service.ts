@@ -35,7 +35,7 @@ export class DataService {
   }
 
   insertProduct(data: IProduct) {
-    return this.httpClient.post(this.baseUrl + '/stores/' + this.storeId + '/products', data);
+    return this.httpClient.post(this.baseUrl + '/stores/' + this.storeId + '/products', data, {responseType: 'text'});
   }
 
   getProduct(product_id: string) {

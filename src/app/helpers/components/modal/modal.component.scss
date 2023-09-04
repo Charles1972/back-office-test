@@ -1,0 +1,74 @@
+.modal-background {
+  @apply overflow-y-auto overflow-x-hidden fixed z-50 justify-center inset-0;
+
+  &.align-center-always {
+    @apply items-center;
+  }
+
+  &.align-center-not-mobile {
+    @media screen and (min-width: 640px) and (min-height: 640px) {
+      @apply sm:items-center;
+    }
+    @media screen and (max-width: 640px) {
+      @apply top-5 bottom-5;
+    }
+  }
+
+  &.not-align-center {
+    @apply pt-5 md:pt-3;
+  }
+
+  .modal-container {
+    @apply relative bg-white rounded-lg drop-shadow-lg border;
+
+    .close-btn {
+      @apply text-gray-600 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center;
+    }
+
+    .title-container {
+      @apply flex justify-between items-start rounded-t px-5 pt-5;
+
+      &.separator {
+        @apply border-b;
+      }
+
+      &.padding {
+        @apply p-5;
+
+        &.small {
+          @apply px-5 pt-5 pb-3;
+        }
+      }
+    }
+
+    .body-container {
+      @apply p-5 space-y-6; // text-base leading-relaxed text-gray-500;
+    }
+
+    .footer-container {
+      @apply flex items-center p-6 space-x-2 rounded-b border-gray-200;
+
+      &.separator {
+        @apply border-t;
+      }
+    }
+
+    .popup-body-container {
+      @apply p-6 pt-0 text-center;
+
+      .icon-container {
+        @apply flex justify-center mb-4;
+
+        img {
+          @apply h-10;
+        }
+      }
+
+      .popup-message {
+        @apply mb-5 text-lg font-normal; // text-gray-500;
+      }
+    }
+  }
+}
+
+

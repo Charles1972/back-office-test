@@ -1,0 +1,68 @@
+<div [id]="modalId" aria-hidden="true" class="hidden modal-background"
+     [ngClass]="{'align-center-not-mobile': alignCenter && alignCenterNotMobile,
+                 'align-center-always': alignCenter && !alignCenterNotMobile,
+                 'not-align-center': !alignCenter}" (click)="exitOnClick()">
+  <div class="relative px-4 {{widthFull && noMaxWidth ? 'md:px-10' : 'max-w-2xl'}} h-auto {{modalCSS}}" [ngClass]="{'max-w-md': !normalSize || isPopup, 'w-full': widthFull}">
+    <div class="modal-container" [ngClass]="{'w-fit': fitContent}">
+      <div *ngIf="isPopup">
+        <!-- Modal header -->
+        <div class="flex justify-end p-2">
+          <button type="button" class="close-btn" (click)="closeModal(false)">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+        <!-- Modal body -->
+        <div class="popup-body-container">
+          <div #popupIconRef>
+            <ng-content select="[popup-icon]"></ng-content>
+          </div>
+          <ng-container *ngIf="!popupIconRef.hasChildNodes()">
+            <div [ngSwitch]="popupIcon" class="icon-container">
+              <img *ngSwitchCase="eIcon.ok" alt="" src='data:image/svg+xml;base64,PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgZm9jdXNhYmxlPSJmYWxzZSIgZGF0YS1wcmVmaXg9ImZhcyIgZGF0YS1pY29uPSJ0aHVtYnMtdXAiIGNsYXNzPSJzdmctaW5saW5lLS1mYSBmYS10aHVtYnMtdXAgZmEtdy0xNiIgcm9sZT0iaW1nIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSJibHVlIiBkPSJNMTA0IDIyNEgyNGMtMTMuMjU1IDAtMjQgMTAuNzQ1LTI0IDI0djI0MGMwIDEzLjI1NSAxMC43NDUgMjQgMjQgMjRoODBjMTMuMjU1IDAgMjQtMTAuNzQ1IDI0LTI0VjI0OGMwLTEzLjI1NS0xMC43NDUtMjQtMjQtMjR6TTY0IDQ3MmMtMTMuMjU1IDAtMjQtMTAuNzQ1LTI0LTI0czEwLjc0NS0yNCAyNC0yNCAyNCAxMC43NDUgMjQgMjQtMTAuNzQ1IDI0LTI0IDI0ek0zODQgODEuNDUyYzAgNDIuNDE2LTI1Ljk3IDY2LjIwOC0zMy4yNzcgOTQuNTQ4aDEwMS43MjNjMzMuMzk3IDAgNTkuMzk3IDI3Ljc0NiA1OS41NTMgNTguMDk4LjA4NCAxNy45MzgtNy41NDYgMzcuMjQ5LTE5LjQzOSA0OS4xOTdsLS4xMS4xMWM5LjgzNiAyMy4zMzcgOC4yMzcgNTYuMDM3LTkuMzA4IDc5LjQ2OSA4LjY4MSAyNS44OTUtLjA2OSA1Ny43MDQtMTYuMzgyIDc0Ljc1NyA0LjI5OCAxNy41OTggMi4yNDQgMzIuNTc1LTYuMTQ4IDQ0LjYzMkM0NDAuMjAyIDUxMS41ODcgMzg5LjYxNiA1MTIgMzQ2LjgzOSA1MTJsLTIuODQ1LS4wMDFjLTQ4LjI4Ny0uMDE3LTg3LjgwNi0xNy41OTgtMTE5LjU2LTMxLjcyNS0xNS45NTctNy4wOTktMzYuODIxLTE1Ljg4Ny01Mi42NTEtMTYuMTc4LTYuNTQtLjEyLTExLjc4My01LjQ1Ny0xMS43ODMtMTEuOTk4di0yMTMuNzdjMC0zLjIgMS4yODItNi4yNzEgMy41NTgtOC41MjEgMzkuNjE0LTM5LjE0NCA1Ni42NDgtODAuNTg3IDg5LjExNy0xMTMuMTExIDE0LjgwNC0xNC44MzIgMjAuMTg4LTM3LjIzNiAyNS4zOTMtNTguOTAyQzI4Mi41MTUgMzkuMjkzIDI5MS44MTcgMCAzMTIgMGMyNCAwIDcyIDggNzIgODEuNDUyeiI+PC9wYXRoPjwvc3ZnPg=='/>
+              <img *ngSwitchCase="eIcon.warning" alt="" src='data:image/svg+xml;base64,PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgZm9jdXNhYmxlPSJmYWxzZSIgZGF0YS1wcmVmaXg9ImZhcyIgZGF0YS1pY29uPSJleGNsYW1hdGlvbi10cmlhbmdsZSIgY2xhc3M9InN2Zy1pbmxpbmUtLWZhIGZhLWV4Y2xhbWF0aW9uLXRyaWFuZ2xlIGZhLXctMTgiIHJvbGU9ImltZyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgNTc2IDUxMiI+PHBhdGggZmlsbD0ib3JhbmdlIiBkPSJNNTY5LjUxNyA0NDAuMDEzQzU4Ny45NzUgNDcyLjAwNyA1NjQuODA2IDUxMiA1MjcuOTQgNTEySDQ4LjA1NGMtMzYuOTM3IDAtNTkuOTk5LTQwLjA1NS00MS41NzctNzEuOTg3TDI0Ni40MjMgMjMuOTg1YzE4LjQ2Ny0zMi4wMDkgNjQuNzItMzEuOTUxIDgzLjE1NCAwbDIzOS45NCA0MTYuMDI4ek0yODggMzU0Yy0yNS40MDUgMC00NiAyMC41OTUtNDYgNDZzMjAuNTk1IDQ2IDQ2IDQ2IDQ2LTIwLjU5NSA0Ni00Ni0yMC41OTUtNDYtNDYtNDZ6bS00My42NzMtMTY1LjM0Nmw3LjQxOCAxMzZjLjM0NyA2LjM2NCA1LjYwOSAxMS4zNDYgMTEuOTgyIDExLjM0Nmg0OC41NDZjNi4zNzMgMCAxMS42MzUtNC45ODIgMTEuOTgyLTExLjM0Nmw3LjQxOC0xMzZjLjM3NS02Ljg3NC01LjA5OC0xMi42NTQtMTEuOTgyLTEyLjY1NGgtNjMuMzgzYy02Ljg4NCAwLTEyLjM1NiA1Ljc4LTExLjk4MSAxMi42NTR6Ij48L3BhdGg+PC9zdmc+'/>
+              <img *ngSwitchCase="eIcon.error" alt="" src='data:image/svg+xml;base64,PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgZm9jdXNhYmxlPSJmYWxzZSIgZGF0YS1wcmVmaXg9ImZhcyIgZGF0YS1pY29uPSJ0aW1lcyIgY2xhc3M9InN2Zy1pbmxpbmUtLWZhIGZhLXRpbWVzIGZhLXctMTEiIHJvbGU9ImltZyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMzUyIDUxMiI+PHBhdGggZmlsbD0icmVkIiBkPSJNMjQyLjcyIDI1NmwxMDAuMDctMTAwLjA3YzEyLjI4LTEyLjI4IDEyLjI4LTMyLjE5IDAtNDQuNDhsLTIyLjI0LTIyLjI0Yy0xMi4yOC0xMi4yOC0zMi4xOS0xMi4yOC00NC40OCAwTDE3NiAxODkuMjggNzUuOTMgODkuMjFjLTEyLjI4LTEyLjI4LTMyLjE5LTEyLjI4LTQ0LjQ4IDBMOS4yMSAxMTEuNDVjLTEyLjI4IDEyLjI4LTEyLjI4IDMyLjE5IDAgNDQuNDhMMTA5LjI4IDI1NiA5LjIxIDM1Ni4wN2MtMTIuMjggMTIuMjgtMTIuMjggMzIuMTkgMCA0NC40OGwyMi4yNCAyMi4yNGMxMi4yOCAxMi4yOCAzMi4yIDEyLjI4IDQ0LjQ4IDBMMTc2IDMyMi43MmwxMDAuMDcgMTAwLjA3YzEyLjI4IDEyLjI4IDMyLjIgMTIuMjggNDQuNDggMGwyMi4yNC0yMi4yNGMxMi4yOC0xMi4yOCAxMi4yOC0zMi4xOSAwLTQ0LjQ4TDI0Mi43MiAyNTZ6Ij48L3BhdGg+PC9zdmc+'/>
+              <img *ngSwitchCase="eIcon.question" alt="" src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSJwdXJwbGUiIGQ9Ik01MDQgMjU2YzAgMTM2Ljk5Ny0xMTEuMDQzIDI0OC0yNDggMjQ4UzggMzkyLjk5NyA4IDI1NkM4IDExOS4wODMgMTE5LjA0MyA4IDI1NiA4czI0OCAxMTEuMDgzIDI0OCAyNDh6TTI2Mi42NTUgOTBjLTU0LjQ5NyAwLTg5LjI1NSAyMi45NTctMTE2LjU0OSA2My43NTgtMy41MzYgNS4yODYtMi4zNTMgMTIuNDE1IDIuNzE1IDE2LjI1OGwzNC42OTkgMjYuMzFjNS4yMDUgMy45NDcgMTIuNjIxIDMuMDA4IDE2LjY2NS0yLjEyMiAxNy44NjQtMjIuNjU4IDMwLjExMy0zNS43OTcgNTcuMzAzLTM1Ljc5NyAyMC40MjkgMCA0NS42OTggMTMuMTQ4IDQ1LjY5OCAzMi45NTggMCAxNC45NzYtMTIuMzYzIDIyLjY2Ny0zMi41MzQgMzMuOTc2QzI0Ny4xMjggMjM4LjUyOCAyMTYgMjU0Ljk0MSAyMTYgMjk2djRjMCA2LjYyNyA1LjM3MyAxMiAxMiAxMmg1NmM2LjYyNyAwIDEyLTUuMzczIDEyLTEydi0xLjMzM2MwLTI4LjQ2MiA4My4xODYtMjkuNjQ3IDgzLjE4Ni0xMDYuNjY3IDAtNTguMDAyLTYwLjE2NS0xMDItMTE2LjUzMS0xMDJ6TTI1NiAzMzhjLTI1LjM2NSAwLTQ2IDIwLjYzNS00NiA0NiAwIDI1LjM2NCAyMC42MzUgNDYgNDYgNDZzNDYtMjAuNjM2IDQ2LTQ2YzAtMjUuMzY1LTIwLjYzNS00Ni00Ni00NnoiLz48L3N2Zz4='/>
+            </div>
+          </ng-container>
+          <h3 class="popup-message">{{popupMessage}}</h3>
+          <div>
+            <div #ref><ng-content select="[popup-footer]"></ng-content></div>
+            <ng-container *ngIf="!ref.hasChildNodes()">
+              <custom-button cssType="btn-primary" css="" (click)="closeModal(true)" text="OK"></custom-button>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="!isPopup">
+        <!-- Modal header -->
+        <div class="title-container" [ngClass]="{'separator': showSeparators, 'padding': title != '', 'small': title != '' && small}">
+          <span *ngIf="title != ''" class="text-xl font-semibold text-gray-900 lg:text-2xl flex-grow mr-3 {{titleCss}}"
+                [ngClass]="{'text-base lg:text-xl': small}">
+                {{title | translate}}
+          </span>
+          <button type="button" class="close-btn" (click)="closeModal(false)">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd">
+              </path>
+            </svg>
+          </button>
+        </div>
+        <!-- Modal body -->
+        <div class="body-container">
+          <ng-content select="[body]"></ng-content>
+        </div>
+        <!-- Modal footer -->
+        <div *ngIf="showFooterButtons" class="footer-container" [ngClass]="{'separator': showSeparators}">
+          <div #ref class="w-full"><ng-content select="[footer]"></ng-content></div>
+          <ng-container *ngIf="!ref.hasChildNodes()">
+            <div class="flex justify-end w-full">
+              <custom-button cssType="btn-primary" css="" (click)="closeModal(true)" [text]="'OK'"></custom-button>
+              <custom-button cssType="btn-outline-black" css="ml-2" (click)="closeModal(false)"
+                             [text]="'Cancel' | translate"></custom-button>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

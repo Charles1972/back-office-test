@@ -9,7 +9,7 @@
           <span class="ml-1 employee-and-reviews !font-bold">{{product.data.employee}}</span>
         </div>
         <div class="flex">
-          <div *ngIf="product.data.reviews.length > 0" class="max-h-14 overflow-auto">
+          <div *ngIf="product?.data?.reviews?.length > 0" class="max-h-14 overflow-auto">
             <span class="employee-and-reviews">Recensioni:</span>
             <span *ngFor="let review of product.data.reviews; let i = index"
                     class="employee-and-reviews !font-bold truncate" [ngClass]="{'ml-1': i > 0}">
@@ -23,7 +23,7 @@
         <p class="price">€ {{product.data.price | number : '1.2-2' }}</p>
       </div>
       <div class="hidden group-hover:flex delete">
-        <div class="btn">
+        <div role="button" class="btn" (click)="onProductDelete.emit(product)">
           <svg viewBox="0 0 96 96" fill="currentcolor">
             <!-- <title/> -->
             <g>
