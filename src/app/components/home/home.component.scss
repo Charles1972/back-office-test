@@ -18,18 +18,9 @@
 
 .page-container {
   @apply container mx-auto mt-5 sm:mt-8;
-}
 
-.products-container {
-  .header {
-    @apply flex justify-between items-center pb-2;
-
-    .title {
-      @apply font-bold text-sm sm:text-base;
-    }
+  .child-container {
+    @apply mt-5;
   }
 }
 
-.popup-generic-error {
-  @apply mb-7 text-xs break-words;
-}

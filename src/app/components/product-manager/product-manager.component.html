@@ -1,0 +1,54 @@
+<div class="products-container">
+  <div *ngIf="!showAddNewProduct" class="header">
+    <buttons-group [panelLayoutActive]="panelLayoutActive"
+    (onAddNew)="showAddNewProduct = true"
+    (onPanelLayoutActiveChange)="panelLayoutActive = $event">
+    </buttons-group>
+  </div>
+  <hr>
+
+  <div *ngIf="!showAddNewProduct">
+    <div *ngIf="products.length > 0">
+      <panel-grid [products]="products" [panelLayoutActive]="panelLayoutActive"
+        (onPageChange)="page = $event" (onProductDelete)="onProductDelete($event)"></panel-grid>
+    </div>
+
+    <div *ngIf="products.length == 0" class="text-center w-full mt-10">
+      <span class="text-3xl text-orange-500 font-bold">Nessun prodotto configurato!</span>
+    </div>
+  </div>
+
+  <div *ngIf="showAddNewProduct" class="mt-8">
+    <detail-form #newProductForm [title]="'Nuovo Prodotto'" [small]="true"
+                 [configurations]="newFormConfigurations" [isNew]="true"
+                 (dataUpdate)="newProductDataUpdate($event)" [selectsLists]="selectsLists">
+      <div footer>
+        <div class="flex justify-center mt-8">
+          <custom-button cssType="btn-primary" css="w-[150px]" [isSubmit]="true" [text]="'Aggiungi'"></custom-button>
+          <custom-button cssType="btn-outline-black" css="w-[150px] ml-3" (click)="onAddNewCancel()" [text]="'Annulla'"></custom-button>
+        </div>
+      </div>
+    </detail-form>
+  </div>
+</div>
+
+<modal [modalId]="'add-new-popup'" [isPopup]="true" [popupIcon]="ePopupIcon.ok"
+       [popupMessage]="'Perfetto!'">
+  <div popup-footer>
+    <div class="popup-generic-error">Nuovo prodotto aggiunto!</div>
+    <custom-button class="button-size" cssType="btn-primary" [width]="eCustomButtonWidth.half" text="OK"
+              (onClick)="showHideAddedNewProductInfo(false)">
+    </custom-button>
+  </div>
+</modal>
+
+<modal [modalId]="'delete-popup'" [isPopup]="true" [popupIcon]="ePopupIcon.warning"
+       [popupMessage]="'Attenzione!'">
+  <div popup-footer>
+    <div class="popup-generic-error">Cancellare definitivamente il prodotto<span class="ml-1 font-bold">"{{productToDelete?.data?.title}}"</span></div>
+    <custom-button cssType="btn-primary" [text]="'OK'" css="w-[100px]"
+                   (onClick)="deleteProduct()"></custom-button>
+    <custom-button cssType="btn-outline-black w-[100px]" css="ml-3 w-[100px]" [text]="'Annulla'"
+                   (onClick)="showHideDeleteProduct(false)"></custom-button>
+  </div>
+</modal>

@@ -1,0 +1,43 @@
+.tab-container {
+  @apply text-sm font-medium text-center text-gray-800;
+
+  &.tab-container-line {
+    @apply md:border-gray-800 md:border-b;
+  }
+
+  ul {
+    @apply flex justify-center -mb-px gap-4 md:gap-2 ;
+
+    &.small {
+      @apply gap-2;
+    }
+  }
+
+  .tabs {
+    @apply inline-block px-3 py-3 rounded-lg;
+
+    &.border-style {
+      @apply border border-gray-800;
+    }
+
+    &.tabs-border {
+      @apply md:rounded-none md:rounded-t-md md:border-none md:border-b;
+    }
+
+    &.inactive {
+      @apply text-gray-800;
+    }
+
+    &.active {
+      @apply bg-gray-800 text-white font-bold;
+    }
+
+    &.disabled {
+      @apply text-gray-400 border-gray-400 rounded-t-lg cursor-not-allowed;
+    }
+
+    &.small {
+      @apply text-xs px-2 py-2;
+    }
+  }
+}

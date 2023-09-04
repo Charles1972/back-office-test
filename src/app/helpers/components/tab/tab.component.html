@@ -1,0 +1,25 @@
+<div class="tab-container" [ngClass]="{'tab-container-line': !onlyButtons}">
+  <ul class="flex flex-wrap -mb-px" [ngClass]="{'small': small}">
+    <li *ngFor="let conf of configuration; let i = index" [ngClass]="{'grow': growEnabled}">
+      <a *ngIf="conf.link" [routerLink]="conf.link" [routerLinkActive]="activeCSS == '' ? 'active' : activeCSS"
+         class="tabs tabs-border
+                {{borderCSS == '' ? 'border-style' : borderCSS}}
+                {{inactiveCSS == '' ? 'inactive' : inactiveCSS}}
+                {{conf.isActiveOnClick && !conf.disabled ? (activeCSS == '' ? 'active' : activeCSS) : ''}}"
+         [ngClass]="{'min-w-full': growEnabled, 'tabs-border': !onlyButtons,
+                    'disabled': conf.disabled, 'small': small}">
+        {{conf.label}}
+      </a>
+      <a *ngIf="!conf.link"
+          class="tabs tabs-border
+                {{borderCSS == '' ? 'border-style' : borderCSS}}
+                {{inactiveCSS == '' ? 'inactive' : inactiveCSS}}
+                {{conf.isActiveOnClick && !conf.disabled ? (activeCSS == '' ? 'active' : activeCSS) : ''}}
+                cursor-pointer" (click)="onLinkClick(conf)"
+         [ngClass]="{'min-w-full': growEnabled, 'tabs-border': !onlyButtons,
+         'disabled': conf.disabled, 'small': small}">
+        {{conf.label}}
+      </a>
+    </li>
+  </ul>
+</div>

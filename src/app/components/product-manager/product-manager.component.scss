@@ -1,0 +1,13 @@
+.products-container {
+  .header {
+    @apply flex justify-end w-full pb-2;
+
+    .title {
+      @apply font-bold text-sm sm:text-base;
+    }
+  }
+}
+
+.popup-generic-error {
+  @apply mb-7 text-xs break-words;
+}

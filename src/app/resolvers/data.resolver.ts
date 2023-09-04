@@ -9,3 +9,7 @@ export const getStoreResolver: ResolveFn<any> = (route: ActivatedRouteSnapshot, 
 export const getProductsResolver: ResolveFn<any> = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
   return inject(DataService).getProducts();
 }
+
+export const getStatsResolver: ResolveFn<any> = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+  return inject(DataService).getStats();
+}

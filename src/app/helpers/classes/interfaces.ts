@@ -56,5 +56,9 @@ export interface IDetailFormConfiguration {
   checkBoxTextSize?: number;
 }
 
-
-
+export interface ITab {
+  label: string;
+  link?: string;
+  isActiveOnClick?: boolean;
+  disabled?: boolean;
+}

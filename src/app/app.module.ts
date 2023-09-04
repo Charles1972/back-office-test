@@ -15,17 +15,23 @@ import { ButtonsGroupComponent } from './helpers/components/buttons-group/button
 import { PanelGridComponent } from './helpers/components/panel-grid/panel-grid.component';
 import { DecimalPipe } from '@angular/common';
 import { ModalComponent } from './helpers/components/modal/modal.component';
+import { ProductManagerComponent } from './components/product-manager/product-manager.component';
+import { ProductStatsComponent } from './components/product-stats/product-stats.component';
+import { TabComponent } from './helpers/components/tab/tab.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+    ProductManagerComponent,
+    ProductStatsComponent,
 
     DetailFormComponent,
     ModalComponent,
     CustomButtonComponent,
     ButtonsGroupComponent,
     PanelGridComponent,
+    TabComponent
    ],
   imports: [
     BrowserModule,
