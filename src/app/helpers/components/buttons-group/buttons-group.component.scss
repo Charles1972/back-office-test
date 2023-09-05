@@ -9,11 +9,5 @@
     &.selected {
       @apply bg-gray-700 px-2 py-2 text-white cursor-default;
     }
-
-    &.new {
-      @apply w-16 flex justify-center;
-      @apply rounded-md mr-8;
-      @apply bg-blue-500 text-white ring-blue-500 hover:bg-blue-600;
-    }
   }
 }

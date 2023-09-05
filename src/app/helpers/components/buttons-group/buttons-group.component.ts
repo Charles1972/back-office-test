@@ -12,7 +12,6 @@ export class ButtonsGroupComponent implements OnInit {
   @Input() panelLayoutActive: boolean = true;
 
   @Output() onPanelLayoutActiveChange = new EventEmitter<boolean>();
-  @Output() onAddNew = new EventEmitter();
 
   constructor() { }
 

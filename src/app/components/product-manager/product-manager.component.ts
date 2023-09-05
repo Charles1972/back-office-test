@@ -30,6 +30,8 @@ export class ProductManagerComponent implements OnInit {
   newFormConfigurations: IDetailFormConfiguration[] = [];
   selectsLists: any[] = [];
 
+  addNewText: string = 'Nuovo Prodotto';
+
   constructor(private activatedRoute: ActivatedRoute,
               private dataService: DataService) {
   }

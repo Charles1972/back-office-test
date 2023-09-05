@@ -25,7 +25,6 @@
       <div class="hidden group-hover:flex delete">
         <div role="button" class="btn" (click)="onProductDelete.emit(product)">
           <svg viewBox="0 0 96 96" fill="currentcolor">
-            <!-- <title/> -->
             <g>
               <path d="M48,0A48,48,0,1,0,96,48,48.0512,48.0512,0,0,0,48,0Zm0,84A36,36,0,1,1,84,48,36.0393,36.0393,0,0,1,48,84Z"/>
               <path d="M60,42H36a6,6,0,0,0,0,12H60a6,6,0,0,0,0-12Z"/>
@@ -36,20 +35,50 @@
     </li>
   </ul>
   <hr>
-  <div class="text-center mt-5">
-    <pagination-controls class="custom-pagination"
-        [previousLabel]="'Precedente'" [nextLabel]="'Prossima'"
-        (pageChange)="pageChange($event)"></pagination-controls>
-  </div>
 </div>
 
 <div *ngIf="!panelLayoutActive" class="grid-container">
   <ul role="list">
     <li *ngFor="let product of products | paginate: { itemsPerPage: itemsPerPage, currentPage: page }" class="group">
       <div class="flex w-full items-center justify-between space-x-6 p-6">
-        <div class="title truncate-text">{{product.data.title}}</div>
-        <!-- <p class="description">{{product.data.description}}</p> -->
+        <div class="min-w-0 flex-auto">
+          <div class="title truncate-text">{{product.data.title}}</div>
+          <p class="description">{{product.data.description}}</p>
+          <div class="mt-1">
+            <span class="employee-and-reviews">Creato da:</span>
+            <span class="ml-1 employee-and-reviews !font-bold">{{product.data.employee}}</span>
+          </div>
+          <div class="hidden group-hover:flex">
+            <div *ngIf="product?.data?.reviews?.length > 0" class="max-h-14 overflow-auto">
+              <span class="employee-and-reviews">Recensioni:</span>
+              <span *ngFor="let review of product.data.reviews; let i = index"
+                      class="employee-and-reviews !font-bold truncate" [ngClass]="{'ml-1': i > 0}">
+              {{review}}{{i < product.data.reviews.length - 1 ? ',' : ''}}
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="shrink-0 flex flex-col items-end">
+          <p class="category">{{product.data.category}}</p>
+          <p class="price">€ {{product.data.price | number : '1.2-2' }}</p>
+        </div>
+      </div>
+      <div class="hidden group-hover:flex delete">
+        <div role="button" class="btn grid" (click)="onProductDelete.emit(product)">
+          <svg class="w-11" viewBox="0 0 96 96" fill="currentcolor">
+            <g>
+              <path d="M48,0A48,48,0,1,0,96,48,48.0512,48.0512,0,0,0,48,0Zm0,84A36,36,0,1,1,84,48,36.0393,36.0393,0,0,1,48,84Z"/>
+              <path d="M60,42H36a6,6,0,0,0,0,12H60a6,6,0,0,0,0-12Z"/>
+            </g>
+          </svg>
+        </div>
       </div>
      </li>
   </ul>
+</div>
+
+<div class="text-center mt-5">
+  <pagination-controls class="custom-pagination"
+      [previousLabel]="'Precedente'" [nextLabel]="'Prossima'"
+      (pageChange)="pageChange($event)"></pagination-controls>
 </div>

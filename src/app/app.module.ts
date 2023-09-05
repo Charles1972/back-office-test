@@ -18,6 +18,7 @@ import { ModalComponent } from './helpers/components/modal/modal.component';
 import { ProductManagerComponent } from './components/product-manager/product-manager.component';
 import { ProductStatsComponent } from './components/product-stats/product-stats.component';
 import { TabComponent } from './helpers/components/tab/tab.component';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { TabComponent } from './helpers/components/tab/tab.component';
     FormsModule,
     ReactiveFormsModule,
     NgxUiLoaderModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgChartsModule
   ],
   providers: [
     DecimalPipe,

@@ -1,9 +1,17 @@
 .products-container {
   .header {
-    @apply flex justify-end w-full pb-2;
+    @apply flex justify-between w-full pb-2;
 
     .title {
       @apply font-bold text-sm sm:text-base;
+    }
+
+    button {
+      @apply ring-1 ring-inset focus:z-10;
+      @apply px-2 py-2;
+      @apply w-16 flex justify-center;
+      @apply rounded-md mr-8;
+      @apply bg-blue-500 text-white ring-blue-500 hover:bg-blue-600;
     }
   }
 }
