@@ -8,7 +8,8 @@ import { IProduct } from 'src/app/models/data.model';
 })
 export class PanelGridComponent implements OnInit {
   @Input() products: IProduct[] = [];
-  @Input() itemsPerPage: number = 6;
+  @Input() itemsPerPagePanel: number = 5;
+  @Input() itemsPerPageGrid: number = 9;
   @Input() page: number = 1;
   @Input() panelLayoutActive: boolean = true;
 

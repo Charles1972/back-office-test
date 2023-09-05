@@ -1,6 +1,6 @@
 <div *ngIf="panelLayoutActive" class="panel-container">
   <ul role="list">
-    <li *ngFor="let product of products | paginate: { itemsPerPage: itemsPerPage, currentPage: page }" class="group">
+    <li *ngFor="let product of products | paginate: { itemsPerPage: itemsPerPagePanel, currentPage: page }" class="group">
       <div class="min-w-0 flex-auto">
         <p class="title">{{product.data.title}}</p>
         <p class="description">{{product.data.description}}</p>
@@ -39,7 +39,7 @@
 
 <div *ngIf="!panelLayoutActive" class="grid-container">
   <ul role="list">
-    <li *ngFor="let product of products | paginate: { itemsPerPage: itemsPerPage, currentPage: page }" class="group">
+    <li *ngFor="let product of products | paginate: { itemsPerPage: itemsPerPageGrid, currentPage: page }" class="group">
       <div class="flex w-full items-center justify-between space-x-6 p-6">
         <div class="min-w-0 flex-auto">
           <div class="title truncate-text">{{product.data.title}}</div>
