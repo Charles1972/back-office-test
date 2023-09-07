@@ -6,7 +6,7 @@ import { ProductManagerComponent } from './components/product-manager/product-ma
 import { ProductStatsComponent } from './components/product-stats/product-stats.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'products', pathMatch: 'prefix' },
+  { path: '', redirectTo: 'home/products', pathMatch: 'prefix' },
   {
     path: 'home',
     component: HomeComponent,
